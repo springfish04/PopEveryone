@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pop Leopard Cat</title>
+        <title>Pop Everyone</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1, minimum-scale=1">
         <!-- Primary Meta Tags -->
-        <meta name="title" content="Pop Leopard Cat">
-        <meta name="description" content="Click No.15">
+        <meta name="title" content="Pop Everyone">
+        <meta name="description" content="Click Game">
         <!-- Manifest -->
         <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
@@ -16,150 +16,59 @@
         <meta name="theme-color" content="#ffeaab">
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://no15rescute.github.io/PopLeopardCat/">
-        <meta property="og:title" content="Pop Leopard Cat">
-        <meta property="og:description" content="Click No.15">
-        <meta property="og:image" content="https://no15rescute.github.io/PopLeopardCat/icons/icon.jpg">
+        <meta property="og:url" content="https://springfish04.github.io/PopEveryone/">
+        <meta property="og:title" content="Pop Everyone">
+        <meta property="og:description" content="Click Game">
+        <meta property="og:image" content="https://springfish04.github.io/PopEveryone/public/JOJO2.jpg">
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://no15rescute.github.io/PopLeopardCat/">
-        <meta property="twitter:title" content="Pop Leopard Cat">
-        <meta property="twitter:description" content="Click No.15">
-        <meta property="twitter:image" content="https://no15rescute.github.io/PopLeopardCat/icons/icon.jpg">
-        <style>
-            body {
-                -webkit-user-select: none;
-                overflow: hidden;
-                margin: 0px;
-                height: 100vh;
-                width: 100vw;
-                background-image: url("back.jpg");
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-            img {
-                position: absolute;
-                height: 100vh;
-            }
-            div {
-                width: 100vw;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                overflow: hidden;
-            }
-            #counter {
-                line-height: 2em;
-                font-size: 100px;
-                z-index: 100;
-                -webkit-text-stroke: 3px #fff;
-                color: transparent;
-                text-shadow: 0px 0px 15px #da5b11c0
-            }
-        </style>
+        <meta property="twitter:url" content="https://springfish04.github.io/PopEveryone/">
+        <meta property="twitter:title" content="Pop Everyone">
+        <meta property="twitter:description" content="Click Game">
+        <meta property="twitter:image" content="https://springfish04.github.io/PopEveryone/public/JOJO2.jpg">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="./public/index.css">
+
     </head>
     <body>
-        <div id="no15_container" style="min-width: fit-content; min-height: fit-content;">
-            <img id="no15" src="./normal.png"/>
-            <img id="no15_pop" src="./pop.png" style="visibility: hidden;"/>
-            <div id="counter"></div>
+        <div class="bg">
+            <div class="character-list">
+                <div class="container">
+                    <h1>Pop Everyone</h1>
+                    <ul>
+                        <li>
+                            <a href="./padko.html">平平子</a>
+                        </li>
+                        <li>
+                            <a href="./leopard-cat.html">十五號</a>
+                        </li>
+                        <li>
+                            <a href="./lutra.html">露恰露恰</a>
+                        </li>
+                        <li>
+                            <a href="./obear.html">歐貝爾</a>
+                        </li>
+                        <li>
+                            <a href="https://lit.link/springfish">春魚的大平台</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="notice">
+                用電腦的 Chrome 讓你得到最佳體驗唷 🌸
+            </div>
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     </body>
     <script>
         window.onload = () => {
             console.warn('我在幹嘛我怎麼還不去工作????');
-            var no15_container = document.querySelector("#no15_container");
-            var no15 = document.querySelector("#no15");
-            var no15_pop = document.querySelector("#no15_pop");
-            var pop_count = 0;
-            var counter = document.querySelector("#counter");
-            var sound_effect = new Audio('./A.mp3');
-
-            function pop() {
-                playSound();
-                no15.setAttribute("style","visibility: hidden;");
-                no15_pop.setAttribute("style","visibility: unset;");
-            }
-
-            function unpop() {
-                no15_pop.setAttribute("style","visibility: hidden;");
-                no15.setAttribute("style","visibility: unset;");
-            }
-
-            var storage = {};
-            storage.load = function () {
-                var count = localStorage.getItem("pop_count");
-                if (count !== null) {
-                    pop_count = parseInt(count);
-                    counter.innerHTML = pop_count;
-                }
-            };
-            storage.save = function () {
-                localStorage.setItem("pop_count", pop_count);
-            }
-
-            function isMobile() {
-                try{ document.createEvent("TouchEvent"); return true; }
-                catch(e){ return false;}
-            }
-
-            function playSound(){
-                sound_effect.currentTime = 0;
-                sound_effect.play();
-            }
-
-            function count_up() {
-                pop_count++;
-                counter.innerHTML = pop_count;
-                storage.save();
-            }
-
-            storage.load();
-
-            if (isMobile()) {
-                window.addEventListener("touchmove",function(e) {
-                    e.preventDefault();
-                }, { passive: false });
-                no15.setAttribute("src","./up.png");
-                no15_container.addEventListener('touchstart', function (e) {
-                    count_up();
-                    pop();
-                });
-                no15_container.addEventListener('touchend', function (e) {
-                    unpop();
-                });
-            } else {
-                no15_container.addEventListener('mouseover', function (e) {
-                    no15.setAttribute("src","./up.png");
-                });
-                no15_container.addEventListener('mouseout', function (e) {
-                    no15.setAttribute("src","./normal.png");
-                });
-
-                //  點擊事件
-                no15_container.addEventListener('mousedown', function (e) {
-                    count_up();
-                    pop();
-                });
-                no15_container.addEventListener('mouseup', function (e) {
-                    unpop();
-                });
-
-                //  鍵盤事件
-                document.addEventListener('keydown', function (e) {
-                    pop();
-                });
-                document.addEventListener('keyup', function (e) {
-                    count_up();
-                    no15.setAttribute("src","./up.png");
-                    unpop();
-                });
-            }
         }
     </script>
     <script type="module">
         import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-    
+
         const el = document.createElement('pwa-update');
         document.body.appendChild(el);
     </script>

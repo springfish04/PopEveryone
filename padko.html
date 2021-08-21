@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pop Padko</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1, minimum-scale=1">
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Pop Padko">
+        <meta name="description" content="Click Padko">
+        <!-- Manifest -->
+        <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+        <link rel="mask-icon" href="./icons/safari-pinned-tab.svg" color="#ffeaab">
+        <meta name="msapplication-TileColor" content="#ffeaab">
+        <meta name="theme-color" content="#ffeaab">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://springfish04.github.io/PopEveryone/padko.html">
+        <meta property="og:title" content="Pop Padko">
+        <meta property="og:description" content="Click Padko">
+        <meta property="og:image" content="https://springfish04.github.io/PopEveryone/public/padko-og-image.jpg">
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://springfish04.github.io/PopEveryone/padko.html">
+        <meta property="twitter:title" content="Pop v">
+        <meta property="twitter:description" content="Click Padko">
+        <meta property="twitter:image" content="https://springfish04.github.io/PopEveryone/public/padko-og-image.jpg">
+        <link rel="stylesheet" type="text/css" href="./public/style.css">
+        <style>
+            body {
+                background-image: url("public/padko/back.jpg");
+            }
+            #counter {
+                text-shadow: 0px 0px 15px #234abf
+            }
+        </style>
+    </head>
+    <body>
+        <div id="padko_container" style="min-width: fit-content; min-height: fit-content;">
+            <img id="padko" src="./public/padko/normal.png"/>
+            <img id="padko_pop" src="./public/padko/pop.png" style="visibility: hidden;"/>
+            <div id="counter"></div>
+        </div>
+    </body>
+    <script>
+        window.onload = () => {
+            var padko_container = document.querySelector("#padko_container");
+            var padko = document.querySelector("#padko");
+            var padko_pop = document.querySelector("#padko_pop");
+            var pop_count = 0;
+            var counter = document.querySelector("#counter");
+            var sound_effect = new Audio('./public/padko/5ma.mp3');
+
+            function pop() {
+                playSound();
+                padko.setAttribute("style","visibility: hidden;");
+                padko_pop.setAttribute("style","visibility: unset;");
+            }
+
+            function unpop() {
+                padko_pop.setAttribute("style","visibility: hidden;");
+                padko.setAttribute("style","visibility: unset;");
+            }
+
+            var storage = {};
+            storage.load = function () {
+                var count = localStorage.getItem("pop_count_padko");
+                if (count !== null) {
+                    pop_count = parseInt(count);
+                    counter.innerHTML = pop_count;
+                }
+            };
+            storage.save = function () {
+                localStorage.setItem("pop_count_padko", pop_count);
+            }
+
+            function isMobile() {
+                try{ document.createEvent("TouchEvent"); return true; }
+                catch(e){ return false;}
+            }
+
+            function playSound(){
+                sound_effect.currentTime = 0;
+                sound_effect.play();
+            }
+
+            function count_up() {
+                pop_count++;
+                counter.innerHTML = pop_count;
+                storage.save();
+            }
+
+            storage.load();
+
+            if (isMobile()) {
+                window.addEventListener("touchmove",function(e) {
+                    e.preventDefault();
+                }, { passive: false });
+                padko_container.addEventListener('touchstart', function (e) {
+                    count_up();
+                    pop();
+                });
+                padko_container.addEventListener('touchend', function (e) {
+                    unpop();
+                });
+            } else {
+                //  點擊事件
+                padko_container.addEventListener('mousedown', function (e) {
+                    count_up();
+                    pop();
+                });
+                padko_container.addEventListener('mouseup', function (e) {
+                    unpop();
+                });
+
+                //  鍵盤事件
+                document.addEventListener('keydown', function (e) {
+                    pop();
+                });
+                document.addEventListener('keyup', function (e) {
+                    count_up();
+                    padko.setAttribute("src","./public/padko/normal.png");
+                    unpop();
+                });
+            }
+        }
+    </script>
+    <script type="module">
+        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+        const el = document.createElement('pwa-update');
+        document.body.appendChild(el);
+    </script>
+</html>
