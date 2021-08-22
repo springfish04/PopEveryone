@@ -29,7 +29,7 @@
         <link rel="stylesheet" type="text/css" href="./public/style.css">
         <style>
             body {
-                background-image: url("public/chilla/back.png");
+                background-image: url("public/chilla/back.png") !important;
             }
             #counter {
                 text-shadow: 0px 0px 15px #DB4E47
@@ -138,7 +138,6 @@
     </script>
     <script type="module">
         import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";
-
         const el = document.createElement("pwa-update");
         document.body.appendChild(el);
     </script>
