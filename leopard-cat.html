@@ -35,6 +35,7 @@
                 text-shadow: 0px 0px 15px #da5b11c0
             }
         </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
         <div id="no15_container" style="min-width: fit-content; min-height: fit-content;">
@@ -45,23 +46,28 @@
     </body>
     <script>
         window.onload = () => {
-            console.warn('我在幹嘛我怎麼還不去工作????');
             var no15_container = document.querySelector("#no15_container");
             var no15 = document.querySelector("#no15");
             var no15_pop = document.querySelector("#no15_pop");
             var pop_count = 0;
             var counter = document.querySelector("#counter");
-            var sound_effect = new Audio('./public/15/A.mp3');
+            var sound = new Howl({
+                src: [
+                    "./public/15/A.mp3"
+                ]
+            });
 
             function pop() {
                 playSound();
-                no15.setAttribute("style","visibility: hidden;");
-                no15_pop.setAttribute("style","visibility: unset;");
+                no15.setAttribute("style", "visibility: hidden;");
+                no15_pop.setAttribute("style", "visibility: unset;");
             }
 
             function unpop() {
-                no15_pop.setAttribute("style","visibility: hidden;");
-                no15.setAttribute("style","visibility: unset;");
+                setTimeout(() => {
+                    no15_pop.setAttribute("style", "visibility: hidden;");
+                    no15.setAttribute("style", "visibility: unset;");
+                }, 100);
             }
 
             var storage = {};
@@ -77,13 +83,16 @@
             }
 
             function isMobile() {
-                try{ document.createEvent("TouchEvent"); return true; }
-                catch(e){ return false;}
+                try {
+                    document.createEvent("TouchEvent");
+                    return true;
+                } catch (err) {
+                    return false;
+                }
             }
 
             function playSound(){
-                sound_effect.currentTime = 0;
-                sound_effect.play();
+                sound.play();
             }
 
             function count_up() {
@@ -95,39 +104,39 @@
             storage.load();
 
             if (isMobile()) {
-                window.addEventListener("touchmove",function(e) {
+                window.addEventListener("touchmove", function (e) {
                     e.preventDefault();
                 }, { passive: false });
                 no15.setAttribute("src","./public/15/up.png");
-                no15_container.addEventListener('touchstart', function (e) {
+                no15_container.addEventListener("touchstart", function (e) {
                     count_up();
                     pop();
                 });
-                no15_container.addEventListener('touchend', function (e) {
+                no15_container.addEventListener("touchend", function (e) {
                     unpop();
                 });
             } else {
-                no15_container.addEventListener('mouseover', function (e) {
+                no15_container.addEventListener("mouseover", function (e) {
                     no15.setAttribute("src","./public/15/up.png");
                 });
-                no15_container.addEventListener('mouseout', function (e) {
+                no15_container.addEventListener("mouseout", function (e) {
                     no15.setAttribute("src","./public/15/normal.png");
                 });
 
                 //  點擊事件
-                no15_container.addEventListener('mousedown', function (e) {
+                no15_container.addEventListener("mousedown", function (e) {
                     count_up();
                     pop();
                 });
-                no15_container.addEventListener('mouseup', function (e) {
+                no15_container.addEventListener("mouseup", function (e) {
                     unpop();
                 });
 
                 //  鍵盤事件
-                document.addEventListener('keydown', function (e) {
+                document.addEventListener("keydown", function (e) {
                     pop();
                 });
-                document.addEventListener('keyup', function (e) {
+                document.addEventListener("keyup", function (e) {
                     count_up();
                     no15.setAttribute("src","./public/15/up.png");
                     unpop();
@@ -136,9 +145,9 @@
         }
     </script>
     <script type="module">
-        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+        import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";
 
-        const el = document.createElement('pwa-update');
+        const el = document.createElement("pwa-update");
         document.body.appendChild(el);
     </script>
 </html>

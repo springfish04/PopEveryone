@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pop Obear</title>
+        <title>Pop Chilla</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1, minimum-scale=1">
         <!-- Primary Meta Tags -->
-        <meta name="title" content="Pop Obear">
-        <meta name="description" content="Click Obear">
+        <meta name="title" content="Pop Chilla">
+        <meta name="description" content="Click Chilla">
         <!-- Manifest -->
         <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
@@ -16,67 +16,70 @@
         <meta name="theme-color" content="#ffeaab">
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://springfish04.github.io/PopEveryone/obear.html">
-        <meta property="og:title" content="Pop Obear">
-        <meta property="og:description" content="Click Obear">
-        <meta property="og:image" content="https://springfish04.github.io/PopEveryone/public/obear-og-image.jpg">
+        <meta property="og:url" content="https://springfish04.github.io/PopEveryone/chilla.html">
+        <meta property="og:title" content="Pop Chilla">
+        <meta property="og:description" content="Click Chilla">
+        <meta property="og:image" content="https://springfish04.github.io/PopEveryone/public/chilla-og-image.jpg">
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://springfish04.github.io/PopEveryone/obear.html">
-        <meta property="twitter:title" content="Pop Obear">
-        <meta property="twitter:description" content="Click Obear">
-        <meta property="twitter:image" content="https://springfish04.github.io/PopEveryone/public/obear-og-image.jpg">
+        <meta property="twitter:url" content="https://springfish04.github.io/PopEveryone/chilla.html">
+        <meta property="twitter:title" content="Pop v">
+        <meta property="twitter:description" content="Click Chilla">
+        <meta property="twitter:image" content="https://springfish04.github.io/PopEveryone/public/chilla-og-image.jpg">
         <link rel="stylesheet" type="text/css" href="./public/style.css">
         <style>
+            body {
+                background-image: url("public/chilla/back.png");
+            }
             #counter {
-                text-shadow: 0px 0px 15px #6C4693
+                text-shadow: 0px 0px 15px #DB4E47
             }
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
-        <div id="obear_container" style="min-width: fit-content; min-height: fit-content;">
-            <img id="obear" src="./public/obear/normal.jpg"/>
-            <img id="obear_pop" src="./public/obear/pop.jpg" style="visibility: hidden;"/>
+        <div id="chilla_container" style="min-width: fit-content; min-height: fit-content;">
+            <img id="chilla" src="./public/chilla/normal.png"/>
+            <img id="chilla_pop" src="./public/chilla/pop.png" style="visibility: hidden;"/>
             <div id="counter"></div>
         </div>
     </body>
     <script>
         window.onload = () => {
-            var obear_container = document.querySelector("#obear_container");
-            var obear = document.querySelector("#obear");
-            var obear_pop = document.querySelector("#obear_pop");
+            var chilla_container = document.querySelector("#chilla_container");
+            var chilla = document.querySelector("#chilla");
+            var chilla_pop = document.querySelector("#chilla_pop");
             var pop_count = 0;
             var counter = document.querySelector("#counter");
             var sound = new Howl({
                 src: [
-                    "./public/obear/Obear_OLU.mp3"
+                    "./public/chilla/de.wav"
                 ]
             });
 
             function pop() {
                 playSound();
-                obear.setAttribute("style","visibility: hidden;");
-                obear_pop.setAttribute("style","visibility: unset;");
+                chilla.setAttribute("style","visibility: hidden;");
+                chilla_pop.setAttribute("style","visibility: unset;");
             }
 
             function unpop() {
                 setTimeout(() => {
-                    obear_pop.setAttribute("style","visibility: hidden;");
-                    obear.setAttribute("style","visibility: unset;");
+                    chilla_pop.setAttribute("style","visibility: hidden;");
+                    chilla.setAttribute("style","visibility: unset;");
                 }, 100);
             }
 
             var storage = {};
             storage.load = function () {
-                var count = localStorage.getItem("pop_count_obear");
+                var count = localStorage.getItem("pop_count_chilla");
                 if (count !== null) {
                     pop_count = parseInt(count);
                     counter.innerHTML = pop_count;
                 }
             };
             storage.save = function () {
-                localStorage.setItem("pop_count_obear", pop_count);
+                localStorage.setItem("pop_count_chilla", pop_count);
             }
 
             function isMobile() {
@@ -104,20 +107,20 @@
                 window.addEventListener("touchmove", function (e) {
                     e.preventDefault();
                 }, { passive: false });
-                obear_container.addEventListener("touchstart", function (e) {
+                chilla_container.addEventListener("touchstart", function (e) {
                     count_up();
                     pop();
                 });
-                obear_container.addEventListener("touchend", function (e) {
+                chilla_container.addEventListener("touchend", function (e) {
                     unpop();
                 });
             } else {
                 //  點擊事件
-                obear_container.addEventListener("mousedown", function (e) {
+                chilla_container.addEventListener("mousedown", function (e) {
                     count_up();
                     pop();
                 });
-                obear_container.addEventListener("mouseup", function (e) {
+                chilla_container.addEventListener("mouseup", function (e) {
                     unpop();
                 });
 
@@ -127,7 +130,7 @@
                 });
                 document.addEventListener("keyup", function (e) {
                     count_up();
-                    obear.setAttribute("src","./public/obear/normal.jpg");
+                    chilla.setAttribute("src","./public/chilla/normal.png");
                     unpop();
                 });
             }

@@ -32,6 +32,7 @@
                 text-shadow: 0px 0px 15px #BCECF8
             }
         </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
         <div id="lutra_container" style="min-width: fit-content; min-height: fit-content;">
@@ -47,7 +48,11 @@
             var lutra_pop = document.querySelector("#lutra_pop");
             var pop_count = 0;
             var counter = document.querySelector("#counter");
-            var sound_effect = new Audio('./public/lutra/67.wav');
+            var sound = new Howl({
+                src: [
+                    "./public/lutra/67.wav"
+                ]
+            });
 
             function pop() {
                 playSound();
@@ -56,8 +61,10 @@
             }
 
             function unpop() {
-                lutra_pop.setAttribute("style","visibility: hidden;");
-                lutra.setAttribute("style","visibility: unset;");
+                setTimeout(() => {
+                    lutra_pop.setAttribute("style","visibility: hidden;");
+                    lutra.setAttribute("style","visibility: unset;");
+                }, 100);
             }
 
             var storage = {};
@@ -73,13 +80,16 @@
             }
 
             function isMobile() {
-                try{ document.createEvent("TouchEvent"); return true; }
-                catch(e){ return false; }
+                try {
+                    document.createEvent("TouchEvent");
+                    return true;
+                } catch (err) {
+                    return false;
+                }
             }
 
             function playSound(){
-                sound_effect.currentTime = 0;
-                sound_effect.play();
+                sound.play();
             }
 
             function count_up() {
@@ -91,31 +101,31 @@
             storage.load();
 
             if (isMobile()) {
-                window.addEventListener("touchmove",function(e) {
+                window.addEventListener("touchmove", function (e) {
                     e.preventDefault();
                 }, { passive: false });
-                lutra_container.addEventListener('touchstart', function (e) {
+                lutra_container.addEventListener("touchstart", function (e) {
                     count_up();
                     pop();
                 });
-                lutra_container.addEventListener('touchend', function (e) {
+                lutra_container.addEventListener("touchend", function (e) {
                     unpop();
                 });
             } else {
                 //  點擊事件
-                lutra_container.addEventListener('mousedown', function (e) {
+                lutra_container.addEventListener("mousedown", function (e) {
                     count_up();
                     pop();
                 });
-                lutra_container.addEventListener('mouseup', function (e) {
+                lutra_container.addEventListener("mouseup", function (e) {
                     unpop();
                 });
 
                 //  鍵盤事件
-                document.addEventListener('keydown', function (e) {
+                document.addEventListener("keydown", function (e) {
                     pop();
                 });
-                document.addEventListener('keyup', function (e) {
+                document.addEventListener("keyup", function (e) {
                     count_up();
                     lutra.setAttribute("src","./public/lutra/normal.jpg");
                     unpop();
@@ -124,9 +134,9 @@
         }
     </script>
     <script type="module">
-        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+        import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";
 
-        const el = document.createElement('pwa-update');
+        const el = document.createElement("pwa-update");
         document.body.appendChild(el);
     </script>
 </html>
